@@ -16,7 +16,8 @@
 
   .big-logo {
     margin: 24px auto;
-    max-width: 200px;
+    width: 200px;
+    height: 222px;
   }
 
   .company-text {
@@ -52,6 +53,7 @@
     filter: invert(14%) sepia(75%) saturate(3308%) hue-rotate(274deg)
       brightness(94%) contrast(94%);
     height: 24px;
+    width: 24px;
     margin: auto;
   }
 
@@ -96,6 +98,7 @@
   }
 
   a {
+    color: #6f1f8f;
     text-decoration: none;
   }
 </style>
@@ -107,6 +110,9 @@
       src="assets/12Triangles.svg"
       alt="12 Triangles logo" />
   </a>
+  <br />
+  <br />
+  <br />
   <div class="company-text">
     12 Triangles is a hybrid app development company located in the Midwest.
   </div>
@@ -133,11 +139,17 @@
   </a>
   &nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="https://twitter.com/12triangles">
-    <img class="social-image" src="assets/logo-twitter.svg" alt="" />
+    <img
+      class="social-image"
+      src="assets/logo-twitter.svg"
+      alt="Follow us on Twitter" />
   </a>
   &nbsp;&nbsp;
   <a href="https://www.snapchat.com/add/twelvetriangles">
-    <img class="social-image" src="assets/logo-snapchat.svg" alt="" />
+    <img
+      class="social-image"
+      src="assets/logo-snapchat.svg"
+      alt="Follow us on Snapchat" />
   </a>
 </div>
 <!-- <div class="newsletter">Sign up for the 12 Triangles newsletter</div>
