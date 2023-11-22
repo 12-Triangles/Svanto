@@ -57,7 +57,6 @@
     text-align: center;
     font-size: 12px;
   }
-
   @media (min-width: 640px) {
   }
 
@@ -77,4 +76,4 @@
     <a class="link" href="https://ionhipster.com">Blog</a>
   </div>
 </div>
-<div class="copyright">© 12 Triangles LLC, 2022</div>
+<div class="copyright">© 12 Triangles LLC, 2024</div>

@@ -42,6 +42,7 @@
     max-width: 320px;
     margin: auto;
     align-items: center;
+    justify-content: center;
     display: flex;
   }
 
@@ -79,7 +80,7 @@
     background-image: url('../assets/flairPreview.jpg');
   }
 
-  .magnetic {
+  .icg {
     background-image: url('../assets/magneticPreview.jpg');
   }
 
@@ -122,10 +123,14 @@
     <div class="hover-effect flair" />
     <div class="title">Say it with Flair!</div>
   </a>
-  <a href="https://magnetic.photo">
+  <a href="https://instantcardgrading.com">
+    <div class="hover-effect icg" />
+    <div class="title">Instant Card Grading</div>
+  </a>
+  <!-- <a href="https://magnetic.photo">
     <div class="hover-effect magnetic" />
     <div class="title">Magnetic</div>
-  </a>
+  </a> -->
   <a href="https://ionhipster.com">
     <div class="hover-effect ionhipster" />
     <div class="title">ionhipster</div>
@@ -133,10 +138,10 @@
 </div>
 <div class="quick-links">
   <a use:link href="/about">About 12 Triangles</a>
-  &nbsp;&nbsp;|&nbsp;&nbsp;
+  <!-- &nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="https://www.notion.so/Flair-Docs-3abf582e3c8c4ee689630a0714ef44c4">
     Flair Support
-  </a>
+  </a> -->
   &nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="https://twitter.com/12triangles">
     <img
