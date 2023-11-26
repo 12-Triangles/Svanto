@@ -23,7 +23,7 @@
   .company-text {
     text-align: center;
     font-size: 24px;
-    margin: auto 64px;
+    margin: auto 48px;
     color: #6f1f8f;
   }
 
