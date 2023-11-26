@@ -81,7 +81,7 @@
   }
 
   .icg {
-    background-image: url('../assets/magneticPreview.jpg');
+    background-image: url('../assets/icgPreview.jpg');
   }
 
   .ionhipster {
