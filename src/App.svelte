@@ -112,7 +112,7 @@
 <div class="app-shell">
   <div class="nav-bar">
     <a href="/" class="brand">12 Triangles</a>
-    <a class="link" href="#/contact"> Apply to work together <span class="link-pointer" aria-hidden="true">→</span></a>
+    <a class="link" href="#/contact">Work with us <span class="link-pointer" aria-hidden="true">→</span></a>
   </div>
 
   <div class="content">
