@@ -42,10 +42,6 @@
   }
 
   .hero {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(240px, 0.9fr);
-    gap: 40px;
-    align-items: end;
     padding: 30px 0 56px;
     border-bottom: 1px solid rgba(42, 24, 51, 0.1);
   }
@@ -59,20 +55,19 @@
     margin-bottom: 18px;
   }
 
-  h1 {
-    font-size: clamp(42px, 7vw, 88px);
-    line-height: 0.96;
-    margin: 0 0 22px;
-    color: #201824;
-    text-transform: uppercase;
-    max-width: 9ch;
+  .hero-title-img {
+    display: block;
+    width: min(100%, clamp(200px, 45vw, 280px));
+    height: auto;
+    margin: 0 auto 22px;
   }
 
   .lede {
     font-size: 21px;
     line-height: 1.7;
     color: #413747;
-    max-width: 34ch;
+    margin: 48px auto 0;
+    text-align: center;
   }
 
   .hero-note {
@@ -83,6 +78,12 @@
     border-left: 2px solid rgba(111, 31, 143, 0.2);
     color: #4d4254;
     line-height: 1.8;
+  }
+
+  .hero-note.page-bottom-note {
+    margin-top: 36px;
+    padding-top: 36px;
+    border-top: 1px solid rgba(42, 24, 51, 0.1);
   }
 
   .section {
@@ -167,11 +168,6 @@
   }
 
   @media (max-width: 860px) {
-    .hero {
-      grid-template-columns: 1fr;
-      gap: 28px;
-    }
-
     .page {
       padding-top: 28px;
     }
@@ -185,22 +181,16 @@
 <div class="page">
   <section class="hero">
     <div>
-      <div class="eyebrow">12 Triangles</div>
-      <h1>Thoughtfully crafted AI services and digital product development</h1>
+      <!-- <div class="eyebrow">12 Triangles</div> -->
+      <img
+        class="hero-title-img"
+        src="/assets/12Triangles.svg"
+        alt="Thoughtfully crafted AI services and digital product development"
+        width="280"
+        height="310"
+      />
       <div class="lede">
-        We build useful systems, sharp interfaces, and practical AI workflows
-        that help ideas become products instead of staying stuck as concepts.
-      </div>
-    </div>
-
-    <div class="hero-note">
-      <div>
-        12 Triangles works across AI tooling, internal systems, and digital
-        product execution with an emphasis on clarity, taste, and real utility.
-      </div>
-      <div>
-        The work spans experiments, products, and operating infrastructure—each
-        built to be functional first and memorable second.
+        Thoughtfully crafted AI services and digital product development
       </div>
     </div>
   </section>
@@ -231,6 +221,17 @@
       {/each}
     </div>
   </section>
+
+  <!-- <div class="hero-note page-bottom-note">
+    <div>
+      12 Triangles works across AI tooling, internal systems, and digital
+      product execution with an emphasis on clarity, taste, and real utility.
+    </div>
+    <div>
+      The work spans experiments, products, and operating infrastructure—each
+      built to be functional first and memorable second.
+    </div>
+  </div> -->
 
   <div class="footer-links">
     <a use:link href="/about">About 12 Triangles</a>

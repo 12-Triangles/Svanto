@@ -53,6 +53,7 @@
     border-radius: 999px;
     font-size: 12px;
     font-weight: 700;
+    font-style: normal;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     transition: background-color 0.2s ease, color 0.2s ease;
@@ -61,6 +62,14 @@
   .link:hover {
     background: rgba(111, 31, 143, 0.08);
     color: #6f1f8f !important;
+    font-style: italic;
+  }
+
+  .link-pointer {
+    font-size: 1.5em;
+    display: inline-block;
+    line-height: 1;
+    vertical-align: -0.06em;
   }
 
   .content {
@@ -102,12 +111,7 @@
 <div class="app-shell">
   <div class="nav-bar">
     <a href="/" class="brand">12 Triangles</a>
-    <div class="links">
-      <a class="link" href="https://instantcardgrading.com">ICG</a>
-      <a class="link" href="#/dodici">Dodici</a>
-      <a class="link" href="https://sayitwithflair.com">Flair</a>
-      <a class="link" href="#/about">About</a>
-    </div>
+    <a class="link" href="#/contact"> Work with us <span class="link-pointer" aria-hidden="true">→</span></a>
   </div>
 
   <div class="content">
