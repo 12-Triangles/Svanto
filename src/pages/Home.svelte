@@ -42,8 +42,7 @@
   }
 
   .hero {
-    padding: 30px 0 56px;
-    border-bottom: 1px solid rgba(42, 24, 51, 0.1);
+    padding: 32px 0 16px;
   }
 
   .eyebrow {
@@ -196,7 +195,6 @@
   </section>
 
   <section class="section">
-    <div class="section-title">Selected Work</div>
     <div class="project-list">
       {#each projects as project}
         {#if project.internal}
