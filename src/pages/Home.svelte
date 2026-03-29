@@ -6,11 +6,11 @@
     id: '12triangles',
     title: '12 Triangles',
     subtitle: 'Thoughtfully crafted AI services and digital product development',
-    description:
-      'We build useful systems, sharp interfaces, and practical AI workflows that help ideas become products instead of staying stuck as concepts.',
+    // description:
+    //   'We build useful systems, sharp interfaces, and practical AI workflows that help ideas become products instead of staying stuck as concepts.',
     heroMode: 'logo',
-    heroAccent: 'rgba(111, 31, 143, 0.18)',
-    heroTint: 'linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))',
+    // heroAccent: 'rgba(111, 31, 143, 0.18)',
+    // heroTint: 'linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))',
     logo: '/assets/12Triangles.svg'
   }
 
@@ -28,9 +28,10 @@
       heroSubtitle: 'Operating notes from the edge of building',
       heroDescription:
         'Case studies, workflow notes, and product thinking from an AI business partner taking shape inside 12 Triangles.',
-      heroAccent: '#6f1f8f',
-      heroTint: 'linear-gradient(135deg, rgba(42, 24, 51, 0.82), rgba(111, 31, 143, 0.72), rgba(235, 108, 133, 0.54))',
-      heroBlur: 'radial-gradient(circle at 20% 25%, rgba(255,255,255,0.28), transparent 30%), radial-gradient(circle at 80% 30%, rgba(235,108,133,0.32), transparent 26%), radial-gradient(circle at 50% 80%, rgba(111,31,143,0.32), transparent 32%)'
+      // heroAccent: 'rgba(111, 31, 143, 0.16)',
+      // heroTint:
+        // 'linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(244, 234, 236, 0.38), rgba(111, 31, 143, 0.05), rgba(235, 108, 133, 0.04))',
+      // heroBlur: 'radial-gradient(circle at 20% 25%, rgba(255,255,255,0.28), transparent 30%), radial-gradient(circle at 80% 30%, rgba(235,108,133,0.32), transparent 26%), radial-gradient(circle at 50% 80%, rgba(111,31,143,0.32), transparent 32%)'
     },
     {
       id: 'icg',
@@ -41,6 +42,7 @@
       description:
         'AI-powered sports card grading workflows, tooling, and product exploration from the ICG ecosystem.',
       heroMode: 'image',
+      logo: '/assets/12Triangles.svg',
       heroTitle: 'Instant Card Grading',
       heroSubtitle: 'AI-assisted grading, card intelligence, and product systems',
       heroDescription:
@@ -58,7 +60,8 @@
       label: 'Product',
       description:
         'A playful consumer experience built with the same care for design, motion, and sharp product execution.',
-      heroMode: 'image',
+      heroMode: 'logo',
+      logo: '/assets/12Triangles.svg',
       heroTitle: 'Say it with Flair',
       heroSubtitle: 'Playful product design with personality',
       heroDescription:
@@ -103,8 +106,8 @@
     position: relative;
     min-height: 420px;
     overflow: hidden;
-    border: 1px solid rgba(42, 24, 51, 0.1);
-    background: rgba(255, 255, 255, 0.34);
+    /* border: 1px solid rgba(42, 24, 51, 0.1); */
+    /* background: rgba(255, 255, 255, 0.34); */
   }
 
   .hero-plate,
@@ -207,8 +210,8 @@
   }
 
   .hero-subtitle {
-    max-width: 34ch;
-    margin: 0 auto;
+    max-width: 56ch;
+    margin: 32px auto 0;
     font-size: 22px;
     line-height: 1.55;
     color: #413747;
@@ -324,28 +327,19 @@
         class:is-visible={activeHero.heroMode === 'image'}
         class="hero-image"
         style={`--hero-image: ${activeHero.heroImage ? `url(${activeHero.heroImage})` : 'none'};`} />
-      <div class="hero-noise" />
-      <div class="hero-orb" />
+      <!-- <div class="hero-noise" /> -->
+      
 
       <div class="hero-inner">
         <div class="hero-copy">
-          <div class="hero-kicker">{activeProject ? activeHero.label : '12 Triangles'}</div>
-
-          {#if activeHero.heroMode === 'logo'}
             <img
               class="hero-logo"
               src={activeHero.logo}
               alt={activeHero.subtitle}
               width="280"
               height="310" />
-          {:else if activeHero.heroMode === 'wordmark'}
-            <div class="hero-wordmark">{activeHero.heroTitle}</div>
-          {:else}
-            <h1 class="hero-title">{activeHero.heroTitle}</h1>
-          {/if}
-
-          <div class="hero-subtitle">{activeHero.heroSubtitle || activeHero.subtitle}</div>
-          <div class="hero-description">{activeHero.heroDescription || activeHero.description}</div>
+          <div class="hero-subtitle">{activeHero.heroSubtitle || activeHero.subtitle || ""}</div>
+          <!-- <div class="hero-description">{activeHero.heroDescription || activeHero.description || ""}</div> -->
         </div>
       </div>
     </div>
