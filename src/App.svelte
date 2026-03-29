@@ -103,9 +103,10 @@
   <div class="nav-bar">
     <a href="/" class="brand">12 Triangles</a>
     <div class="links">
-      <a class="link" href="/dodici">Dodici Blog</a>
+      <a class="link" href="https://instantcardgrading.com">ICG</a>
+      <a class="link" href="#/dodici">Dodici</a>
       <a class="link" href="https://sayitwithflair.com">Flair</a>
-      <a class="link" href="/about">About</a>
+      <a class="link" href="#/about">About</a>
     </div>
   </div>
 
