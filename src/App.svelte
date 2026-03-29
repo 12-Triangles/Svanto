@@ -2,6 +2,8 @@
   import Router from 'svelte-spa-router'
   import Home from './pages/Home.svelte'
   import About from './pages/About.svelte'
+  import DodiciBlog from './pages/DodiciBlog.svelte'
+  import DodiciCaseStudy from './pages/DodiciCaseStudy.svelte'
 </script>
 
 <style>
@@ -67,13 +69,21 @@
   }
 </style>
 
-<Router routes={{ '/': Home, '/about': About, '*': Home }} />
+<Router
+  routes={{
+    '/': Home,
+    '/about': About,
+    '/dodici': DodiciBlog,
+    '/dodici/case-study': DodiciCaseStudy,
+    '*': Home
+  }}
+/>
 
 <div class="nav-bar">
   <a href="/" class="home-button">12 Triangles</a>
   <div class="links">
     <a class="link" href="https://sayitwithflair.com">Flair</a>
-    <a class="link" href="https://ionhipster.com">Blog</a>
+    <a class="link" href="/dodici">Dodici Blog</a>
   </div>
 </div>
 <div class="copyright">© 12 Triangles LLC, 2024</div>

@@ -84,8 +84,23 @@
     background-image: url('../assets/icgPreview.jpg');
   }
 
-  .ionhipster {
-    background-image: url('../assets/ionhipsterPreview.jpg');
+  .dodici {
+    background: linear-gradient(145deg, #2a1833 0%, #6f1f8f 48%, #eb6c85 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dodici::before {
+    content: 'D';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 136px;
+    font-weight: 700;
+    text-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
   }
 
   .title {
@@ -131,9 +146,9 @@
     <div class="hover-effect magnetic" />
     <div class="title">Magnetic</div>
   </a> -->
-  <a href="https://ionhipster.com">
-    <div class="hover-effect ionhipster" />
-    <div class="title">ionhipster</div>
+  <a use:link href="/dodici">
+    <div class="hover-effect dodici" />
+    <div class="title">Dodici Blog</div>
   </a>
 </div>
 <div class="quick-links">
