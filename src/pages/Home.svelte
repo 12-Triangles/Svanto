@@ -130,7 +130,7 @@
   <br />
   <br />
   <div class="company-text">
-    12 Triangles is a hybrid app development company located in the Midwest.
+    Thoughtfully crafted AI services and digital product development
   </div>
 </div>
 <div class="feature-link-group">

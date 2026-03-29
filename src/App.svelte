@@ -82,8 +82,8 @@
 <div class="nav-bar">
   <a href="/" class="home-button">12 Triangles</a>
   <div class="links">
-    <a class="link" href="https://sayitwithflair.com">Flair</a>
-    <a class="link" href="/dodici">Dodici Blog</a>
+    <a class="link" href="https://instantcardgrading.com">ICG</a>
+    <a class="link" href="#/dodici">Dodici</a>
   </div>
 </div>
 <div class="copyright">© 12 Triangles LLC, 2024</div>
