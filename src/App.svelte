@@ -2,6 +2,7 @@
   import Router from 'svelte-spa-router'
   import Home from './pages/Home.svelte'
   import About from './pages/About.svelte'
+  import Contact from './pages/Contact.svelte'
   import DodiciBlog from './pages/DodiciBlog.svelte'
   import DodiciCaseStudy from './pages/DodiciCaseStudy.svelte'
 </script>
@@ -111,7 +112,7 @@
 <div class="app-shell">
   <div class="nav-bar">
     <a href="/" class="brand">12 Triangles</a>
-    <a class="link" href="#/contact"> Work with us <span class="link-pointer" aria-hidden="true">→</span></a>
+    <a class="link" href="#/contact"> Apply to work together <span class="link-pointer" aria-hidden="true">→</span></a>
   </div>
 
   <div class="content">
@@ -119,6 +120,7 @@
       routes={{
         '/': Home,
         '/about': About,
+        '/contact': Contact,
         '/dodici': DodiciBlog,
         '/dodici/case-study': DodiciCaseStudy,
         '*': Home
