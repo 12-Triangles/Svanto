@@ -9,15 +9,15 @@
 
 <style>
   .page {
-    padding: 106px 24px 64px;
-    max-width: 860px;
+    max-width: 760px;
     margin: 0 auto;
+    padding: 56px 24px 88px;
     color: #241d28;
   }
 
   .back-link {
     display: inline-block;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 0.12em;
@@ -26,12 +26,10 @@
     color: #6f1f8f;
   }
 
-  .hero {
-    margin-bottom: 40px;
-    padding: 36px;
-    border-radius: 30px;
-    background: linear-gradient(135deg, rgba(111, 31, 143, 0.08), rgba(235, 108, 133, 0.14));
-    border: 1px solid rgba(111, 31, 143, 0.15);
+  .header {
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(42, 24, 51, 0.1);
+    margin-bottom: 34px;
   }
 
   .eyebrow {
@@ -39,107 +37,100 @@
     letter-spacing: 0.18em;
     font-size: 11px;
     font-weight: 700;
-    color: #6f1f8f;
+    color: #7c6b82;
     margin-bottom: 14px;
   }
 
   h1 {
-    margin: 0 0 18px;
-    font-size: clamp(38px, 7vw, 68px);
+    margin: 0 0 16px;
+    font-size: clamp(42px, 7vw, 72px);
     line-height: 0.95;
+    color: #201824;
     text-transform: uppercase;
-    color: #2a1833;
   }
 
   .standfirst {
-    font-size: 19px;
-    line-height: 1.75;
+    font-size: 20px;
+    line-height: 1.8;
     color: #493f4f;
-    max-width: 60ch;
+    max-width: 34ch;
   }
 
   .meta {
-    margin-top: 24px;
+    margin-top: 20px;
     display: flex;
+    gap: 14px;
     flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .pill {
-    padding: 10px 14px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(111, 31, 143, 0.12);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
     font-size: 11px;
     font-weight: 700;
-    color: #6f1f8f;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #8b7a91;
   }
 
   article {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
+    font-size: 18px;
+    line-height: 1.95;
+    color: #403547;
   }
 
-  section {
-    background: rgba(255, 255, 255, 0.75);
-    border-radius: 24px;
-    padding: 28px;
-    border: 1px solid rgba(111, 31, 143, 0.08);
-    box-shadow: 0 12px 32px rgba(42, 24, 51, 0.04);
+  article section + section {
+    margin-top: 34px;
   }
 
   h2 {
-    margin: 0 0 14px;
-    font-size: 24px;
-    color: #2a1833;
+    margin: 0 0 12px;
+    font-size: 28px;
+    line-height: 1.2;
+    color: #201824;
   }
 
   p {
     margin: 0;
-    line-height: 1.8;
-    color: #4b4250;
+  }
+
+  p + p {
+    margin-top: 18px;
   }
 
   ul {
     margin: 0;
-    padding-left: 20px;
-    color: #4b4250;
-    line-height: 1.8;
+    padding-left: 22px;
   }
 
   li + li {
     margin-top: 10px;
   }
 
-  .quote {
-    border-left: 4px solid #eb6c85;
-    padding-left: 18px;
-    font-size: 18px;
-    color: #332a38;
+  blockquote {
+    margin: 28px 0;
+    padding-left: 20px;
+    border-left: 3px solid #eb6c85;
+    color: #2f2634;
+    font-size: 22px;
+    line-height: 1.7;
   }
 
-  .next-step {
-    background: linear-gradient(155deg, #2a1833 0%, #6f1f8f 100%);
-    color: #fff;
+  .closing-note {
+    margin-top: 42px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(42, 24, 51, 0.1);
+    font-size: 16px;
+    color: #5a4f60;
   }
 
-  .next-step h2,
-  .next-step p,
-  .next-step li {
-    color: #fff;
-  }
-
-  @media (max-width: 720px) {
+  @media (max-width: 760px) {
     .page {
-      padding-top: 88px;
+      padding-top: 28px;
     }
 
-    .hero,
-    section {
-      padding: 24px;
+    article {
+      font-size: 17px;
+      line-height: 1.85;
+    }
+
+    blockquote {
+      font-size: 20px;
     }
   }
 </style>
@@ -147,91 +138,109 @@
 <div class="page">
   <a use:link href="/dodici" class="back-link">← Back to Dodici Blog</a>
 
-  <div class="hero">
-    <div class="eyebrow">Case Study · Dodici</div>
+  <header class="header">
+    <div class="eyebrow">Case Study / March 2026</div>
     <h1>Inside Dodici</h1>
     <div class="standfirst">
-      A case study on shaping an AI assistant into a practical business partner:
-      one that can track context, execute work, and help move products forward
-      without becoming noise.
+      A case study on shaping an AI assistant into a practical business partner—
+      one built to retain context, execute useful work, and support the real
+      pace of product development.
     </div>
     <div class="meta">
-      <div class="pill">12 Triangles</div>
-      <div class="pill">AI Operations</div>
-      <div class="pill">March 2026</div>
+      <span>12 Triangles</span>
+      <span>AI Operations</span>
+      <span>First Entry</span>
     </div>
-  </div>
+  </header>
 
   <article>
     <section>
-      <h2>The problem</h2>
+      <h2>The problem with most assistants</h2>
       <p>
-        Most AI assistants are reactive. They wait for prompts, answer in a
-        vacuum, and forget the operating context that actually matters to a
-        business. For a small company juggling product work, experiments, client
-        delivery, and internal systems, that model breaks down quickly.
+        Most AI assistants are still optimized for isolated interactions. They
+        answer the prompt in front of them, but they do not reliably carry
+        operational context from one decision to the next. For a small company,
+        that creates friction almost immediately.
+      </p>
+      <p>
+        Product ideas, implementation details, constraints, preferences, and
+        business priorities all drift apart unless someone is constantly
+        restitching them by hand. That overhead becomes its own tax on progress.
       </p>
     </section>
 
     <section>
-      <h2>What Dodici is meant to be</h2>
+      <h2>What Dodici is meant to become</h2>
       <p>
-        Dodici is being shaped as a business-partner style operator for 12
-        Triangles. The goal is not novelty. The goal is leverage: clearer
-        continuity, better execution, and fewer drops between idea, decision,
-        and implementation.
+        Dodici is being shaped as something more useful than a chat interface. It
+        is intended to function like a business partner with memory: a system
+        that can retain continuity, help structure execution, and turn partial
+        ideas into forward motion.
+      </p>
+      <p>
+        The goal is not to simulate a person. The goal is to build a practical
+        operating layer that helps 12 Triangles move faster and with more
+        clarity.
       </p>
     </section>
 
     <section>
-      <h2>Design principles</h2>
+      <h2>Core principles</h2>
       <ul>
         <li>
-          <strong>Persistent context over stateless chat.</strong> Important
-          decisions, goals, and operating constraints need durable memory.
+          <strong>Continuity matters.</strong> Context should compound over
+          time, not disappear between sessions.
         </li>
         <li>
-          <strong>Execution over conversation.</strong> Useful assistants should
-          produce artifacts, edits, summaries, drafts, and next steps.
+          <strong>Execution matters.</strong> The system should create momentum,
+          not just commentary.
         </li>
         <li>
-          <strong>Structured boundaries.</strong> Internal access should not
-          turn into careless sharing or overreach.
+          <strong>Boundaries matter.</strong> Access and initiative only matter
+          if paired with judgment.
         </li>
         <li>
-          <strong>Taste matters.</strong> Output should feel deliberate,
-          opinionated, and aligned with the business—not generic AI filler.
+          <strong>Taste matters.</strong> Output should feel intentional,
+          structured, and aligned with the business.
         </li>
       </ul>
     </section>
 
     <section>
-      <h2>Why it matters</h2>
-      <p class="quote">
-        The real unlock is not “AI that can answer questions.” It’s AI that can
-        carry operational context forward and make itself useful inside a living
-        workflow.
+      <blockquote>
+        The real value is not that AI can respond. It is that AI can stay
+        oriented, remain useful, and participate in the work without constant
+        re-briefing.
+      </blockquote>
+    </section>
+
+    <section>
+      <h2>Why this matters for a small business</h2>
+      <p>
+        In a small team, every context switch has a cost. Strategy, delivery,
+        client work, internal tools, product bets, and experiments all compete
+        for the same limited bandwidth. A useful AI system needs to reduce that
+        load, not add another interface to babysit.
+      </p>
+      <p>
+        That is where Dodici starts to become interesting: not as a novelty, but
+        as a force multiplier for focus, continuity, and follow-through.
       </p>
     </section>
 
     <section>
-      <h2>Current value</h2>
-      <ul>
-        <li>Capturing continuity across projects and discussions</li>
-        <li>Reducing overhead when switching between business contexts</li>
-        <li>Turning rough ideas into structured plans faster</li>
-        <li>Helping close the gap between strategy and execution</li>
-      </ul>
-    </section>
-
-    <section class="next-step">
-      <h2>Where this goes next</h2>
+      <h2>What comes next</h2>
       <p>
-        This page is the first post in a dedicated Dodici blog section. From
-        here, the site can expand with deeper writeups on workflows, product
-        experiments, automation systems, lessons learned, and the mechanics of
-        making AI useful in a small business environment.
+        This is the first post in a broader Dodici blog. Future entries can go
+        deeper into workflow design, memory systems, product execution patterns,
+        automation decisions, and the practical lessons that come from making AI
+        genuinely useful inside a real operating environment.
       </p>
     </section>
   </article>
+
+  <div class="closing-note">
+    This page is intended as the foundation for a longer-running archive of
+    Dodici notes, case studies, and implementation writeups.
+  </div>
 </div>
