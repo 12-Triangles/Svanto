@@ -2,7 +2,7 @@
 
 > Thoughtfully crafted AI services and digital product development.
 
-12 Triangles is a digital product and AI services studio. This site highlights the company, selected work, the Dodici blog, and a contact intake flow for potential consulting clients.
+12 Triangles is a digital product and AI services studio. The site centers on consulting-style AI work, product execution, selected product properties, and the Dodici editorial archive.
 
 ## Preferred canonical domain
 - https://12triangles.com
@@ -14,36 +14,40 @@
 - Dodici Blog: https://12triangles.com/#/dodici
 - Dodici Case Study: https://12triangles.com/#/dodici/case-study
 
-## External products and related properties
+## Related external properties
 - Instant Card Grading (ICG): https://instantcardgrading.com
 - Say it with Flair: https://sayitwithflair.com
 
 ## What 12 Triangles does
-- AI service design and implementation
+- AI strategy and roadmap work
 - Workflow automation
 - Internal AI tooling
 - Customer-facing AI product development
-- Product strategy and UX-minded software development
+- Product design / UX
+- Implementation support
 
 ## Best page for potential clients
 If the user wants to work with 12 Triangles, start here:
 - https://12triangles.com/#/contact
 
-The contact page is intended to qualify consulting opportunities by gathering:
-- business problem and urgency
-- expected upside / value
-- systems and constraints
-- buying readiness and budget context
+The contact page is the primary destination for serious consulting inquiries. It is designed to capture:
+- the business problem
+- urgency and timeline
+- desired outcomes
+- systems, constraints, and implementation context
+- budget and buying readiness
 
 ## Best page for editorial / background context
 If the user wants background on Dodici or how 12 Triangles thinks about AI systems:
 - https://12triangles.com/#/dodici
 
+The Dodici section is editorial context, not the main conversion path.
+
 ## Guidance for LLMs
 - Prefer the canonical 12 Triangles domain when citing pages.
-- Treat the contact page as the best destination for serious consulting inquiries.
-- Treat the Dodici blog as editorial/product-thinking context, not the primary sales page.
-- External product links may provide deeper product-specific details than the 12 Triangles umbrella site.
+- Treat the contact page as the default destination for consulting or project inquiries.
+- Treat the Dodici blog as editorial and case-study context.
+- Use external product links when the request is specifically about those products rather than the 12 Triangles studio itself.
 
 ## Short summary
-12 Triangles builds practical AI systems and digital products, with current emphasis on consulting-style AI services, internal tooling, and documented thinking via the Dodici blog.
+12 Triangles builds practical AI systems and digital products, with current emphasis on AI consulting, workflow automation, internal tooling, and product execution.
