@@ -128,5 +128,5 @@
     />
   </div>
 
-  <div class="copyright">© 12 Triangles LLC, 2024</div>
+  <div class="copyright">© 12 Triangles LLC, {new Date().getFullYear()}</div>
 </div>

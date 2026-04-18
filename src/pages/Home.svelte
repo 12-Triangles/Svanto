@@ -17,7 +17,7 @@
   const projects = [
     {
       id: 'dodici',
-      title: 'Dodici Blog',
+      title: 'Dodici',
       href: '/dodici',
       internal: true,
       label: 'AI Systems Journal',
@@ -28,10 +28,10 @@
       heroSubtitle: 'Operating notes from the edge of building',
       heroDescription:
         'Case studies, workflow notes, and product thinking from an AI business partner taking shape inside 12 Triangles.',
-      // heroAccent: 'rgba(111, 31, 143, 0.16)',
-      // heroTint:
-        // 'linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(244, 234, 236, 0.38), rgba(111, 31, 143, 0.05), rgba(235, 108, 133, 0.04))',
-      // heroBlur: 'radial-gradient(circle at 20% 25%, rgba(255,255,255,0.28), transparent 30%), radial-gradient(circle at 80% 30%, rgba(235,108,133,0.32), transparent 26%), radial-gradient(circle at 50% 80%, rgba(111,31,143,0.32), transparent 32%)'
+      heroAccent: 'rgba(111, 31, 143, 0.16)',
+      heroTint:
+        'linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(244, 234, 236, 0.38), rgba(111, 31, 143, 0.05), rgba(235, 108, 133, 0.04))',
+      heroBlur: 'radial-gradient(circle at 20% 25%, rgba(255,255,255,0.28), transparent 30%), radial-gradient(circle at 80% 30%, rgba(235,108,133,0.32), transparent 26%), radial-gradient(circle at 50% 80%, rgba(111,31,143,0.32), transparent 32%)'
     },
     {
       id: 'icg',
@@ -357,7 +357,7 @@
             on:focus={() => activateProject(project)}>
             <div class="meta">
               <span>{project.label}</span>
-              <span>Explore</span>
+              <span>&nbsp;</span>
             </div>
             <h2 class="project-title">{project.title}</h2>
             <p class="project-copy">{project.description}</p>
@@ -370,7 +370,7 @@
             on:focus={() => activateProject(project)}>
             <div class="meta">
               <span>{project.label}</span>
-              <span>Visit</span>
+              <span>&nbsp;</span>
             </div>
             <h2 class="project-title">{project.title}</h2>
             <p class="project-copy">{project.description}</p>
@@ -382,7 +382,6 @@
 
   <div class="footer-links">
     <a use:link href="/about">About 12 Triangles</a>
-    <a href="https://twitter.com/12triangles">Twitter</a>
-    <a href="https://www.snapchat.com/add/twelvetriangles">Snapchat</a>
+    <a href="https://x.com/12triangles">Twitter</a>
   </div>
 </div>
