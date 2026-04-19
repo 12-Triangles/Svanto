@@ -2,6 +2,7 @@
   import { onMount } from 'svelte'
   import { cubicOut } from 'svelte/easing'
   import { link } from 'svelte-spa-router'
+  import { HOME_HERO_RESET } from '../lib/homeHeroReset.js'
 
   /** Crossfade-friendly transition; final frame matches `.hero-image.is-visible` */
   function heroImageTransition(node, { duration = 480 } = {}) {
@@ -100,6 +101,9 @@
 
   onMount(() => {
     window.scrollTo(0, 0)
+    const onExternalReset = () => resetStickyHero()
+    window.addEventListener(HOME_HERO_RESET, onExternalReset)
+    return () => window.removeEventListener(HOME_HERO_RESET, onExternalReset)
   })
 
   function activateProject(project) {
@@ -108,6 +112,11 @@
   }
 
   function clearHover() {
+    hoveredProject = null
+  }
+
+  function resetStickyHero() {
+    lastHoveredProject = null
     hoveredProject = null
   }
 </script>
@@ -405,7 +414,7 @@
   </section>
 
   <div class="footer-links">
-    <a use:link href="/about">About 12 Triangles</a>
+    <a use:link href="/about" on:mouseenter={resetStickyHero}>About 12 Triangles</a>
     <!-- <a href="https://x.com/12triangles">Twitter</a> -->
   </div>
 </div>

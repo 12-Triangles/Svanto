@@ -1,5 +1,6 @@
 <script>
   import Router, { link } from 'svelte-spa-router'
+  import { dispatchHomeHeroReset } from './lib/homeHeroReset.js'
   import Home from './pages/Home.svelte'
   import About from './pages/About.svelte'
   import Contact from './pages/Contact.svelte'
@@ -100,7 +101,10 @@
 
 <div class="app-shell">
   <nav class="nav-bar">
-    <a href="https://12triangles.com" class="nav-brand">12 Triangles</a>
+    <a
+      href="https://12triangles.com"
+      class="nav-brand"
+      on:mouseenter={dispatchHomeHeroReset}>12 Triangles</a>
     <div class="links">
       <!-- <a class="link" href="#/contact">Work with us <span aria-hidden="true">→</span></a> -->
     </div>
