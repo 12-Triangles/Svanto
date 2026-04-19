@@ -5,16 +5,15 @@
   import { HOME_HERO_RESET } from '../lib/homeHeroReset.js'
 
   /** Crossfade-friendly transition; final frame matches `.hero-image.is-visible` */
-  function heroImageTransition(node, { duration = 480 } = {}) {
+  function heroImageTransition(node, { duration = 720 } = {}) {
     return {
       duration,
       easing: cubicOut,
       css: (t) => {
         const opacity = 0.44 * t
         const blur = 14 * t
-        const scale = 1 + 0.08 * t
         const saturate = 0.95 + 0.07 * t
-        return `opacity: ${opacity}; transform: scale(${scale}); filter: blur(${blur}px) saturate(${saturate});`
+        return `opacity: ${opacity};  filter: blur(${blur}px) saturate(${saturate});`
       }
     }
   }
@@ -22,13 +21,19 @@
   const defaultHero = {
     id: '12triangles',
     title: '12 Triangles',
-    subtitle: 'Thoughtfully crafted AI services and digital product development',
+    // subtitle: '',
     // description:
     //   'We build useful systems, sharp interfaces, and practical AI workflows that help ideas become products instead of staying stuck as concepts.',
-    heroMode: 'logo',
+    heroMode: 'image',
     // heroAccent: 'rgba(111, 31, 143, 0.18)',
-    // heroTint: 'linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))',
-    logo: '/assets/12Triangles.svg'
+    // heroTint: 'linear-gradient(180deg, rgba(255,255,255,1), rgba(255,255,255,1))',
+    // logo: '/assets/12Triangles.svg',
+    // heroAccent: '#222222',
+    heroSubtitle: 'Thoughtfully crafted AI services and digital product development',
+    heroTint:
+      'linear-gradient(219deg, rgba(235, 108, 133, 0.16) 0%, rgba(194, 101, 232, 0.12) 38%, rgba(255, 255, 255, 0.55) 72%, rgba(255, 250, 252) 100%)',
+    heroImage: '/assets/square.jpg'
+    // heroBlur: 'radial-gradient(circle at 18% 22%, rgba(255,255,255,0.22), transparent 26%), radial-gradient(circle at 82% 26%, rgba(170,132,255,0.3), transparent 28%), radial-gradient(circle at 60% 82%, rgba(76,41,126,0.3), transparent 32%)'
   }
 
   const projects = [
@@ -164,7 +169,7 @@
 
   .hero-image.is-visible {
     opacity: 0.44;
-    transform: scale(1.08);
+    /* transform: scale(1.08); */
     filter: blur(14px) saturate(1.02);
   }
 
