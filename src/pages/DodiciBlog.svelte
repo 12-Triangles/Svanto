@@ -73,9 +73,9 @@
     transition: transform 0.2s ease;
   }
 
-  .post:hover {
+  /* .post:hover {
     transform: translateX(6px);
-  }
+  } */
 
   .meta {
     font-size: 11px;

@@ -1,5 +1,5 @@
 <script>
-  import Router from 'svelte-spa-router'
+  import Router, { link } from 'svelte-spa-router'
   import Home from './pages/Home.svelte'
   import About from './pages/About.svelte'
   import Contact from './pages/Contact.svelte'
@@ -18,59 +18,53 @@
     width: 100%;
     box-sizing: border-box;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
-    padding: 0 22px;
-    height: 64px;
-    position: sticky;
-    top: 0;
+    min-height: 42px;
+    position: fixed;
     z-index: 20;
-    background: rgba(244, 234, 236, 0.94);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(42, 24, 51, 0.08);
+    background: #222222;
   }
 
-  .brand {
-    color: #2a1833 !important;
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
     text-decoration: none;
-    font-size: 12px;
+    color: #ffffff !important;
+    background: linear-gradient(219.01deg, #eb6c85 0%, #c265e8 100%);
     font-weight: 700;
-    letter-spacing: 0.18em;
     text-transform: uppercase;
-    background: transparent;
+    padding: 12px;
+  }
+
+  .nav-brand:hover {
+    filter: brightness(1.06);
   }
 
   .links {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 28px;
+    padding: 0 22px 0 16px;
   }
 
   .link {
-    color: #4c4053 !important;
+    color: #ffffff !important;
     text-decoration: none;
     background: transparent;
-    padding: 10px 12px;
-    border-radius: 999px;
-    font-size: 12px;
+    
+    font-size: 14px;
     font-weight: 700;
-    font-style: normal;
-    letter-spacing: 0.08em;
+    
     text-transform: uppercase;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    font-style: normal;
+    transition: font-style 0.2s ease;
   }
 
   .link:hover {
-    background: rgba(111, 31, 143, 0.08);
-    color: #6f1f8f !important;
+    opacity: 0.82;
     font-style: italic;
-  }
-
-  .link-pointer {
-    font-size: 1.5em;
-    display: inline-block;
-    line-height: 1;
-    vertical-align: -0.06em;
   }
 
   .content {
@@ -93,27 +87,24 @@
     color: #241d28;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 320px) {
     .nav-bar {
-      height: auto;
-      padding: 14px 16px;
-      gap: 12px;
-      align-items: flex-start;
-      flex-direction: column;
+      font-size: 12px;
     }
 
-    .links {
-      flex-wrap: wrap;
-      gap: 6px;
+    .link { 
+      font-size: 10px;
     }
   }
 </style>
 
 <div class="app-shell">
-  <div class="nav-bar">
-    <a href="/" class="brand">12 Triangles</a>
-    <a class="link" href="#/contact">Work with us <span class="link-pointer" aria-hidden="true">→</span></a>
-  </div>
+  <nav class="nav-bar">
+    <a href="https://12triangles.com" class="nav-brand">12 Triangles</a>
+    <div class="links">
+      <!-- <a class="link" href="#/contact">Work with us <span aria-hidden="true">→</span></a> -->
+    </div>
+  </nav>
 
   <div class="content">
     <Router

@@ -1,6 +1,22 @@
 <script>
   import { onMount } from 'svelte'
+  import { cubicOut } from 'svelte/easing'
   import { link } from 'svelte-spa-router'
+
+  /** Crossfade-friendly transition; final frame matches `.hero-image.is-visible` */
+  function heroImageTransition(node, { duration = 480 } = {}) {
+    return {
+      duration,
+      easing: cubicOut,
+      css: (t) => {
+        const opacity = 0.44 * t
+        const blur = 14 * t
+        const scale = 1 + 0.08 * t
+        const saturate = 0.95 + 0.07 * t
+        return `opacity: ${opacity}; transform: scale(${scale}); filter: blur(${blur}px) saturate(${saturate});`
+      }
+    }
+  }
 
   const defaultHero = {
     id: '12triangles',
@@ -17,17 +33,18 @@
   const projects = [
     {
       id: 'dodici',
-      title: 'Dodici',
+      title: 'AI Systems',
       href: '/dodici',
       internal: true,
-      label: 'AI Systems Journal',
+      label: 'Research',
       description:
-        'Notes, case studies, and practical operating lessons from building Dodici into a useful business partner.',
+        'Notes, case studies, and experiments co-created with AI Agents',
       heroMode: 'wordmark',
+      logo: '/assets/dodici.png',
       heroTitle: 'Dodici',
-      heroSubtitle: 'Operating notes from the edge of building',
+      heroSubtitle: 'Openclaw + Claude + Obsidian',
       heroDescription:
-        'Case studies, workflow notes, and product thinking from an AI business partner taking shape inside 12 Triangles.',
+        'Case studies, workflow notes, and product thinking from an AI business partner taking shape inside 12 Triangles',
       heroAccent: 'rgba(111, 31, 143, 0.16)',
       heroTint:
         'linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(244, 234, 236, 0.38), rgba(111, 31, 143, 0.05), rgba(235, 108, 133, 0.04))',
@@ -40,13 +57,13 @@
       internal: false,
       label: 'Product',
       description:
-        'AI-powered sports card grading workflows, tooling, and product exploration from the ICG ecosystem.',
+        'Quickly calculate card centering sub-grade before sending for official grading',
       heroMode: 'image',
-      logo: '/assets/12Triangles.svg',
+      logo: '/assets/bigBoltWeb.png',
       heroTitle: 'Instant Card Grading',
-      heroSubtitle: 'AI-assisted grading, card intelligence, and product systems',
+      heroSubtitle: 'AI powered 2.0 coming soon! Stay tuned!',
       heroDescription:
-        'A growing product ecosystem focused on grading workflows, collector utility, and sharper sports card experiences.',
+        'ICG 1.0 calculates card centering to help determine if your card is worth official grading',
       heroAccent: '#4e2f84',
       heroTint: 'linear-gradient(135deg, rgba(27, 21, 53, 0.78), rgba(78, 47, 132, 0.68), rgba(185, 145, 255, 0.32))',
       heroImage: '/assets/icgPreview.jpg',
@@ -59,23 +76,26 @@
       internal: false,
       label: 'Product',
       description:
-        'A playful consumer experience built with the same care for design, motion, and sharp product execution.',
-      heroMode: 'logo',
-      logo: '/assets/12Triangles.svg',
+        'Flair makes it fast and easy to create and share your own custom stickers',
+      heroMode: 'image',
+      logo: '/assets/flairLogo.svg',
       heroTitle: 'Say it with Flair',
-      heroSubtitle: 'Playful product design with personality',
+      heroSubtitle: 'Easily create and share custom digital stickers',
       heroDescription:
         'A more expressive product world built around delight, motion, and consumer-facing design sensibility.',
-      heroAccent: '#d85e84',
-      heroTint: 'linear-gradient(135deg, rgba(74, 25, 45, 0.62), rgba(216, 94, 132, 0.44), rgba(255, 215, 226, 0.24))',
+        heroAccent: '#4e2f84',
+        heroTint: 'linear-gradient(135deg, rgba(27, 21, 53, 0.78), rgba(78, 47, 132, 0.68), rgba(185, 145, 255, 0.32))',
       heroImage: '/assets/flairPreview.jpg',
-      heroBlur: 'radial-gradient(circle at 22% 24%, rgba(255,255,255,0.26), transparent 28%), radial-gradient(circle at 78% 28%, rgba(255,192,217,0.34), transparent 28%), radial-gradient(circle at 58% 80%, rgba(216,94,132,0.26), transparent 32%)'
+      heroBlur: 'radial-gradient(circle at 18% 22%, rgba(255,255,255,0.22), transparent 26%), radial-gradient(circle at 82% 26%, rgba(170,132,255,0.3), transparent 28%), radial-gradient(circle at 60% 82%, rgba(76,41,126,0.3), transparent 32%)'
     }
   ]
 
-  let activeProject = null
+  /** Set while pointer is over a project row; cleared on list mouseleave */
+  let hoveredProject = null
+  /** After the first project hover, this drives the hero when nothing is hovered */
+  let lastHoveredProject = null
 
-  $: activeHero = activeProject ?? defaultHero
+  $: activeHero = hoveredProject ?? lastHoveredProject ?? defaultHero
   $: heroStyle = `--hero-accent: ${activeHero.heroAccent || '#6f1f8f'}; --hero-tint: ${activeHero.heroTint || 'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))'}; --hero-blur: ${activeHero.heroBlur || 'none'};`
 
   onMount(() => {
@@ -83,11 +103,12 @@
   })
 
   function activateProject(project) {
-    activeProject = project
+    hoveredProject = project
+    lastHoveredProject = project
   }
 
-  function resetProject() {
-    activeProject = null
+  function clearHover() {
+    hoveredProject = null
   }
 </script>
 
@@ -121,7 +142,7 @@
 
   .hero-plate {
     background: var(--hero-tint);
-    transition: background 380ms ease, transform 520ms ease, opacity 320ms ease;
+    /* transition: background 380ms ease, transform 520ms ease, opacity 320ms ease; */
   }
 
   .hero-image {
@@ -129,9 +150,7 @@
     background-size: cover;
     background-position: center;
     opacity: 0;
-    transform: scale(1.04);
     filter: blur(0px) saturate(0.95);
-    transition: opacity 320ms ease, transform 520ms ease, filter 520ms ease;
   }
 
   .hero-image.is-visible {
@@ -143,7 +162,7 @@
   .hero-noise {
     background-image: var(--hero-blur);
     opacity: 0.9;
-    transition: opacity 320ms ease;
+    /* transition: opacity 320ms ease; */
   }
 
   .hero-orb {
@@ -172,10 +191,6 @@
     transition: transform 340ms ease, opacity 280ms ease;
   }
 
-  .hero-frame.is-project .hero-copy {
-    transform: translateY(-4px);
-  }
-
   .hero-kicker {
     text-transform: uppercase;
     letter-spacing: 0.18em;
@@ -187,8 +202,9 @@
 
   .hero-logo {
     display: block;
-    width: min(100%, clamp(200px, 45vw, 280px));
-    height: auto;
+    width: auto;
+    height: 288px;
+    
     margin: 0 auto 22px;
     filter: drop-shadow(0 10px 30px rgba(42, 24, 51, 0.08));
   }
@@ -240,14 +256,13 @@
     display: block;
     text-decoration: none;
     color: inherit;
-    padding: 26px 0;
+    padding: 12px;
     border-bottom: 1px solid rgba(42, 24, 51, 0.1);
-    transition: transform 0.2s ease, color 0.2s ease;
+    /* transition: transform 0.2s ease, color 0.2s ease; */
   }
 
   .project:hover,
   .project:focus-visible {
-    transform: translateX(6px);
     color: #6f1f8f;
     outline: none;
   }
@@ -281,9 +296,11 @@
   .footer-links {
     display: flex;
     align-items: center;
-    gap: 18px;
+    width: 100%;
+    justify-content: center;
+    /* gap: 18px; */
     padding-top: 36px;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
   }
 
   .footer-links a {
@@ -291,7 +308,6 @@
     color: #6f1f8f;
     font-weight: 700;
     font-size: 12px;
-    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
@@ -321,12 +337,20 @@
 
 <div class="page">
   <section class="hero">
-    <div class:is-project={!!activeProject} class="hero-frame" style={heroStyle}>
+    <div
+      class:is-project={!!(hoveredProject ?? lastHoveredProject)}
+      class="hero-frame"
+      style={heroStyle}>
       <div class="hero-plate" />
-      <div
-        class:is-visible={activeHero.heroMode === 'image'}
-        class="hero-image"
-        style={`--hero-image: ${activeHero.heroImage ? `url(${activeHero.heroImage})` : 'none'};`} />
+      {#if activeHero.heroMode === 'image' && activeHero.heroImage}
+        {#key activeHero.heroImage}
+          <div
+            class="hero-image is-visible"
+            in:heroImageTransition
+            out:heroImageTransition
+            style={`--hero-image: url(${activeHero.heroImage});`} />
+        {/key}
+      {/if}
       <!-- <div class="hero-noise" /> -->
       
 
@@ -336,8 +360,8 @@
               class="hero-logo"
               src={activeHero.logo}
               alt={activeHero.subtitle}
-              width="280"
-              height="310" />
+              width="auto"
+              height="288" />
           <div class="hero-subtitle">{activeHero.heroSubtitle || activeHero.subtitle || ""}</div>
           <!-- <div class="hero-description">{activeHero.heroDescription || activeHero.description || ""}</div> -->
         </div>
@@ -346,7 +370,7 @@
   </section>
 
   <section class="section">
-    <div class="project-list" on:mouseleave={resetProject}>
+    <div class="project-list" on:mouseleave={clearHover}>
       {#each projects as project}
         {#if project.internal}
           <a
@@ -382,6 +406,6 @@
 
   <div class="footer-links">
     <a use:link href="/about">About 12 Triangles</a>
-    <a href="https://x.com/12triangles">Twitter</a>
+    <!-- <a href="https://x.com/12triangles">Twitter</a> -->
   </div>
 </div>
