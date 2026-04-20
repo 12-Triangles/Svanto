@@ -1,8 +1,13 @@
 <script>
   import { onMount } from 'svelte'
 
+  let isBigLogoVisible = false
+
   onMount(() => {
     window.scrollTo(0, 0)
+    requestAnimationFrame(() => {
+      isBigLogoVisible = true
+    })
   })
 </script>
 
@@ -26,6 +31,14 @@
     display: block;
     height: auto;
     max-height: 528px;
+    opacity: 0;
+    filter: blur(14px) saturate(0.95);
+    transition: opacity 720ms ease, filter 720ms ease;
+  }
+
+  .big-logo img.is-visible {
+    opacity: 1;
+    filter: blur(0px) saturate(1.02);
   }
 
   .company-text {
@@ -71,6 +84,7 @@
 <div class="header">
   <a class="big-logo" href="/">
     <img
+      class:is-visible={isBigLogoVisible}
       src="assets/busstop.jpg"
       alt="12 Triangles Bus Stop" />
   </a>
@@ -81,7 +95,7 @@
     solutions.
   </div>
   <div>
-    <div class="seperator" />
+    <div class="seperator"></div>
   </div>
   <div class="name">Tyler Kuster</div>
   <div class="about-text">
@@ -90,7 +104,7 @@
     over the last 15 years.
   </div>
   <div>
-    <div class="seperator" />
+    <div class="seperator"></div>
   </div>
   <div class="name">Alum</div>
   <div class="about-text">

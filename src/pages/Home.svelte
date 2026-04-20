@@ -101,7 +101,7 @@
       description:
         'Flair makes it fast and easy to create and share your own custom stickers',
       heroMode: 'image',
-      logo: '/assets/flair.svg',
+      logo: '/assets/flairF.png',
       heroTitle: 'Say it with Flair',
       heroSubtitle: 'Snapchat Developer Challenge Winner',
       heroDescription:
