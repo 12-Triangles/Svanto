@@ -2,9 +2,8 @@
   import { onMount } from 'svelte'
   import { cubicOut } from 'svelte/easing'
   import { link } from 'svelte-spa-router'
-  import { HOME_HERO_RESET } from '../lib/homeHeroReset.js'
+  import { homeHeroResetSignal } from '../lib/homeHeroReset.js'
 
-  /** Crossfade-friendly transition; final frame matches `.hero-image.is-visible` */
   function heroImageTransition(node, { duration = 720 } = {}) {
     return {
       duration,
@@ -20,7 +19,6 @@
 
   const logoDropShadow = 'drop-shadow(0 10px 30px rgba(42, 24, 51, 0.08))'
 
-  /** Same duration/easing as hero image; full-opacity crossfade with blur that clears to sharp */
   function logoTransition(node, { duration = 480 } = {}) {
     return {
       duration,
@@ -37,19 +35,12 @@
   const defaultHero = {
     id: '12triangles',
     title: '12 Triangles',
-    // subtitle: '',
-    // description:
-    //   'We build useful systems, sharp interfaces, and practical AI workflows that help ideas become products instead of staying stuck as concepts.',
     heroMode: 'image',
-    // heroAccent: 'rgba(111, 31, 143, 0.18)',
-    // heroTint: 'linear-gradient(180deg, rgba(255,255,255,1), rgba(255,255,255,1))',
     logo: '/assets/12T.svg',
-    // heroAccent: '#222222',
     heroSubtitle: 'Thoughtfully crafted AI services and digital product development',
     heroTint:
       'linear-gradient(219deg, rgba(235, 108, 133, 0.16) 0%, rgba(194, 101, 232, 0.12) 100%)',
     heroImage: '/assets/square.jpg'
-    // heroBlur: 'radial-gradient(circle at 18% 22%, rgba(255,255,255,0.22), transparent 26%), radial-gradient(circle at 82% 26%, rgba(170,132,255,0.3), transparent 28%), radial-gradient(circle at 60% 82%, rgba(76,41,126,0.3), transparent 32%)'
   }
 
   const projects = [
@@ -70,8 +61,9 @@
       heroAccent: 'rgba(111, 31, 143, 0.16)',
       heroTint:
         'linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(244, 234, 236, 0.38), rgba(111, 31, 143, 0.05), rgba(235, 108, 133, 0.04))',
-        heroImage: '/assets/aiBackground.png',
-      heroBlur: 'radial-gradient(circle at 20% 25%, rgba(255,255,255,0.28), transparent 30%), radial-gradient(circle at 80% 30%, rgba(235,108,133,0.32), transparent 26%), radial-gradient(circle at 50% 80%, rgba(111,31,143,0.32), transparent 32%)'
+      heroImage: '/assets/aiBackground.png',
+      heroBlur:
+        'radial-gradient(circle at 20% 25%, rgba(255,255,255,0.28), transparent 30%), radial-gradient(circle at 80% 30%, rgba(235,108,133,0.32), transparent 26%), radial-gradient(circle at 50% 80%, rgba(111,31,143,0.32), transparent 32%)'
     },
     {
       id: 'icg',
@@ -88,9 +80,11 @@
       heroDescription:
         'ICG 1.0 calculates card centering to help determine if your card is worth official grading',
       heroAccent: '#4e2f84',
-      heroTint: 'linear-gradient(135deg, rgba(27, 21, 53, 0.78), rgba(78, 47, 132, 0.68), rgba(185, 145, 255, 0.32))',
+      heroTint:
+        'linear-gradient(135deg, rgba(27, 21, 53, 0.78), rgba(78, 47, 132, 0.68), rgba(185, 145, 255, 0.32))',
       heroImage: '/assets/icgBackground.jpg',
-      heroBlur: 'radial-gradient(circle at 18% 22%, rgba(255,255,255,0.22), transparent 26%), radial-gradient(circle at 82% 26%, rgba(170,132,255,0.3), transparent 28%), radial-gradient(circle at 60% 82%, rgba(76,41,126,0.3), transparent 32%)'
+      heroBlur:
+        'radial-gradient(circle at 18% 22%, rgba(255,255,255,0.22), transparent 26%), radial-gradient(circle at 82% 26%, rgba(170,132,255,0.3), transparent 28%), radial-gradient(circle at 60% 82%, rgba(76,41,126,0.3), transparent 32%)'
     },
     {
       id: 'flair',
@@ -106,26 +100,34 @@
       heroSubtitle: 'Snapchat Developer Challenge Winner',
       heroDescription:
         'A more expressive product world built around delight, motion, and consumer-facing design sensibility.',
-        heroAccent: '#4e2f84',
-        heroTint: 'linear-gradient(135deg, rgba(27, 21, 53, 0.78), rgba(78, 47, 132, 0.68), rgba(185, 145, 255, 0.32))',
+      heroAccent: '#4e2f84',
+      heroTint:
+        'linear-gradient(135deg, rgba(27, 21, 53, 0.78), rgba(78, 47, 132, 0.68), rgba(185, 145, 255, 0.32))',
       heroImage: '/assets/flairBackground.jpg',
-      heroBlur: 'radial-gradient(circle at 18% 22%, rgba(255,255,255,0.22), transparent 26%), radial-gradient(circle at 82% 26%, rgba(170,132,255,0.3), transparent 28%), radial-gradient(circle at 60% 82%, rgba(76,41,126,0.3), transparent 32%)'
+      heroBlur:
+        'radial-gradient(circle at 18% 22%, rgba(255,255,255,0.22), transparent 26%), radial-gradient(circle at 82% 26%, rgba(170,132,255,0.3), transparent 28%), radial-gradient(circle at 60% 82%, rgba(76,41,126,0.3), transparent 32%)'
     }
   ]
 
-  /** Set while pointer is over a project row; cleared on list mouseleave */
-  let hoveredProject = null
-  /** After the first project hover, this drives the hero when nothing is hovered */
-  let lastHoveredProject = null
+  let hoveredProject = $state(null)
+  let lastHoveredProject = $state(null)
 
-  $: activeHero = hoveredProject ?? lastHoveredProject ?? defaultHero
-  $: heroStyle = `--hero-accent: ${activeHero.heroAccent || '#6f1f8f'}; --hero-tint: ${activeHero.heroTint || 'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))'}; --hero-blur: ${activeHero.heroBlur || 'none'};`
+  const activeHero = $derived(hoveredProject ?? lastHoveredProject ?? defaultHero)
+  const heroStyle = $derived(
+    `--hero-accent: ${activeHero.heroAccent || '#6f1f8f'}; --hero-tint: ${activeHero.heroTint || 'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))'}; --hero-blur: ${activeHero.heroBlur || 'none'};`
+  )
 
   onMount(() => {
     window.scrollTo(0, 0)
-    const onExternalReset = () => resetStickyHero()
-    window.addEventListener(HOME_HERO_RESET, onExternalReset)
-    return () => window.removeEventListener(HOME_HERO_RESET, onExternalReset)
+    let firstTick = true
+    const unsubscribe = homeHeroResetSignal.subscribe(() => {
+      if (firstTick) {
+        firstTick = false
+        return
+      }
+      resetStickyHero()
+    })
+    return unsubscribe
   })
 
   function activateProject(project) {
@@ -158,14 +160,10 @@
     position: relative;
     min-height: 420px;
     overflow: hidden;
-    /* border: 1px solid rgba(42, 24, 51, 0.1); */
-    /* background: rgba(255, 255, 255, 0.34); */
   }
 
   .hero-plate,
-  .hero-image,
-  .hero-noise,
-  .hero-orb {
+  .hero-image {
     position: absolute;
     inset: 0;
     pointer-events: none;
@@ -173,7 +171,6 @@
 
   .hero-plate {
     background: var(--hero-tint);
-    /* transition: background 380ms ease, transform 520ms ease, opacity 320ms ease; */
   }
 
   .hero-image {
@@ -186,25 +183,7 @@
 
   .hero-image.is-visible {
     opacity: 0.44;
-    /* transform: scale(1.08); */
     filter: blur(14px) saturate(1.02);
-  }
-
-  .hero-noise {
-    background-image: var(--hero-blur);
-    opacity: 0.9;
-    /* transition: opacity 320ms ease; */
-  }
-
-  .hero-orb {
-    inset: auto -60px -80px auto;
-    width: 240px;
-    height: 240px;
-    border-radius: 999px;
-    background: radial-gradient(circle, color-mix(in srgb, var(--hero-accent) 28%, transparent) 0%, transparent 68%);
-    filter: blur(8px);
-    opacity: 0.8;
-    transition: transform 520ms ease, background 380ms ease;
   }
 
   .hero-inner {
@@ -220,15 +199,6 @@
   .hero-copy {
     max-width: 700px;
     transition: transform 340ms ease, opacity 280ms ease;
-  }
-
-  .hero-kicker {
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    font-size: 11px;
-    font-weight: 700;
-    color: #7c6b82;
-    margin-bottom: 18px;
   }
 
   .hero-logo-wrap {
@@ -253,36 +223,12 @@
     filter: drop-shadow(0 10px 30px rgba(42, 24, 51, 0.08));
   }
 
-  .hero-wordmark {
-    margin: 0 0 18px;
-    font-size: clamp(50px, 8vw, 96px);
-    line-height: 0.94;
-    text-transform: uppercase;
-    letter-spacing: -0.04em;
-    color: #201824;
-  }
-
-  .hero-title {
-    margin: 0 0 18px;
-    font-size: clamp(30px, 5vw, 56px);
-    line-height: 1;
-    color: #201824;
-  }
-
   .hero-subtitle {
     max-width: 56ch;
     margin: 32px auto 0;
     font-size: 22px;
     line-height: 1.55;
     color: #413747;
-  }
-
-  .hero-description {
-    max-width: 46ch;
-    margin: 20px auto 0;
-    font-size: 16px;
-    line-height: 1.75;
-    color: #564a5b;
   }
 
   .section {
@@ -302,7 +248,6 @@
     color: inherit;
     padding: 12px;
     border-bottom: 1px solid rgba(42, 24, 51, 0.1);
-    /* transition: transform 0.2s ease, color 0.2s ease; */
   }
 
   .project:hover,
@@ -342,9 +287,7 @@
     align-items: center;
     width: 100%;
     justify-content: center;
-    /* gap: 18px; */
     padding-top: 36px;
-    /* flex-wrap: wrap; */
   }
 
   .footer-links a {
@@ -385,17 +328,15 @@
       class:is-project={!!(hoveredProject ?? lastHoveredProject)}
       class="hero-frame"
       style={heroStyle}>
-      <div class="hero-plate" />
+      <div class="hero-plate"></div>
       {#if activeHero.heroMode === 'image' && activeHero.heroImage}
         {#key activeHero.heroImage}
           <div
             class="hero-image is-visible"
             in:heroImageTransition
-            style={`--hero-image: url(${activeHero.heroImage});`} />
+            style={`--hero-image: url(${activeHero.heroImage});`}></div>
         {/key}
       {/if}
-      <!-- <div class="hero-noise" /> -->
-      
 
       <div class="hero-inner">
         <div class="hero-copy">
@@ -406,51 +347,47 @@
                 in:logoTransition
                 src={activeHero.logo}
                 alt={activeHero.title}
-                width="auto"
-                height="288" />
+                decoding="async" />
             {/key}
           </div>
           {#if activeHero.heroSubtitle}
-          <div if={activeHero.heroSubtitle} class="hero-subtitle">{activeHero.heroSubtitle}</div>
-          {/if}
-          {#if !activeHero.heroSubtitle}
+            <div class="hero-subtitle">{activeHero.heroSubtitle}</div>
+          {:else}
             <div class="hero-subtitle">&nbsp;</div>
           {/if}
-          <!-- <div class="hero-description">{activeHero.heroDescription || activeHero.description || ""}</div> -->
         </div>
       </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="project-list" on:mouseleave={clearHover}>
+    {#snippet projectBody(project)}
+      <div class="meta">
+        <span>{project.label}</span>
+        <span>&nbsp;</span>
+      </div>
+      <h2 class="project-title">{project.title}</h2>
+      <p class="project-copy">{project.description}</p>
+    {/snippet}
+
+    <div class="project-list" role="list" onmouseleave={clearHover}>
       {#each projects as project}
         {#if project.internal}
           <a
             use:link
             href={project.href}
             class="project"
-            on:mouseenter={() => activateProject(project)}
-            on:focus={() => activateProject(project)}>
-            <div class="meta">
-              <span>{project.label}</span>
-              <span>&nbsp;</span>
-            </div>
-            <h2 class="project-title">{project.title}</h2>
-            <p class="project-copy">{project.description}</p>
+            onmouseenter={() => activateProject(project)}
+            onfocus={() => activateProject(project)}>
+            {@render projectBody(project)}
           </a>
         {:else}
           <a
             href={project.href}
             class="project"
-            on:mouseenter={() => activateProject(project)}
-            on:focus={() => activateProject(project)}>
-            <div class="meta">
-              <span>{project.label}</span>
-              <span>&nbsp;</span>
-            </div>
-            <h2 class="project-title">{project.title}</h2>
-            <p class="project-copy">{project.description}</p>
+            onmouseenter={() => activateProject(project)}
+            onfocus={() => activateProject(project)}>
+            {@render projectBody(project)}
           </a>
         {/if}
       {/each}
@@ -461,8 +398,7 @@
     <a
       use:link
       href="/about"
-      on:mouseenter={resetStickyHero}
+      onmouseenter={resetStickyHero}
       >About 12 Triangles</a>
-    <!-- <a href="https://x.com/12triangles">Twitter</a> -->
   </div>
 </main>

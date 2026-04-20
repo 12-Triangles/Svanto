@@ -1,31 +1,27 @@
 <script>
-  import { onMount } from 'svelte'
-  import Router, { link, location } from 'svelte-spa-router'
-  import { dispatchHomeHeroReset } from './lib/homeHeroReset.js'
+  import Router, { router } from 'svelte-spa-router'
+  import { wrap } from 'svelte-spa-router/wrap'
+  import { requestHomeHeroReset } from './lib/homeHeroReset.js'
   import Home from './pages/Home.svelte'
   import About from './pages/About.svelte'
-  import Contact from './pages/Contact.svelte'
   import DodiciBlog from './pages/DodiciBlog.svelte'
-  import DodiciCaseStudy from './pages/DodiciCaseStudy.svelte'
+
+  const Contact = wrap({ asyncComponent: () => import('./pages/Contact.svelte') })
+  const DodiciCaseStudy = wrap({ asyncComponent: () => import('./pages/DodiciCaseStudy.svelte') })
 
   /**
-   * Scroll restoration for SPA routing:
-   * - svelte-spa-router keeps the current scroll position by default
-   * - we want new routes to start at the top without a visible "jump"
+   * Scroll restoration for SPA routing: reset to top on every route change
+   * (setting both documentElement/body covers Safari + older browsers).
    */
-  onMount(() => {
-    // Prevent browser from trying to restore scroll on hash/history changes
-    if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+  if (typeof history !== 'undefined' && 'scrollRestoration' in history) {
+    history.scrollRestoration = 'manual'
+  }
 
-    const unsubscribe = location.subscribe(($location) => {
-      // Make the scroll reset happen as early as possible in the route-change timeline.
-      // Setting both documentElement/body covers Safari + older browsers.
-      document.documentElement.scrollTop = 0
-      document.body.scrollTop = 0
-      window.scrollTo(0, 0)
-    })
-
-    return unsubscribe
+  $effect(() => {
+    router.location
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+    window.scrollTo(0, 0)
   })
 </script>
 
@@ -64,31 +60,6 @@
     filter: brightness(1.06);
   }
 
-  .links {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    padding: 0 22px 0 16px;
-  }
-
-  .link {
-    color: #ffffff !important;
-    text-decoration: none;
-    background: transparent;
-    
-    font-size: 14px;
-    font-weight: 700;
-    
-    text-transform: uppercase;
-    font-style: normal;
-    transition: font-style 0.2s ease;
-  }
-
-  .link:hover {
-    opacity: 0.82;
-    font-style: italic;
-  }
-
   .content {
     flex: 1;
   }
@@ -113,10 +84,6 @@
     .nav-bar {
       font-size: 12px;
     }
-
-    .link { 
-      font-size: 10px;
-    }
   }
 </style>
 
@@ -125,10 +92,7 @@
     <a
       href="https://12triangles.com"
       class="nav-brand"
-      on:mouseenter={dispatchHomeHeroReset}>12 Triangles</a>
-    <div class="links">
-      <!-- <a class="link" href="#/contact">Work with us <span aria-hidden="true">→</span></a> -->
-    </div>
+      onmouseenter={requestHomeHeroReset}>12 Triangles</a>
   </nav>
 
   <div class="content">

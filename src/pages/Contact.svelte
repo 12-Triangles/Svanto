@@ -19,10 +19,10 @@
     'Risk reduction'
   ]
 
-  const state = {
+  const state = $state({
     services: [],
     outcomes: []
-  }
+  })
 
   onMount(() => {
     window.scrollTo(0, 0)
@@ -418,7 +418,7 @@
                 type="button"
                 class:active={state.services.includes(option)}
                 class="chip"
-                on:click={() => toggleSelection('services', option)}>{option}</button>
+                onclick={() => toggleSelection('services', option)}>{option}</button>
             {/each}
           </div>
         </div>
@@ -471,7 +471,7 @@
                 type="button"
                 class:active={state.outcomes.includes(option)}
                 class="chip"
-                on:click={() => toggleSelection('outcomes', option)}>{option}</button>
+                onclick={() => toggleSelection('outcomes', option)}>{option}</button>
             {/each}
           </div>
         </div>

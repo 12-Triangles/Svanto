@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
 
-  let isBigLogoVisible = false
+  let isBigLogoVisible = $state(false)
 
   onMount(() => {
     window.scrollTo(0, 0)
@@ -85,8 +85,9 @@
   <a class="big-logo" href="/">
     <img
       class:is-visible={isBigLogoVisible}
-      src="assets/busstop.jpg"
-      alt="12 Triangles Bus Stop" />
+      src="/assets/busstop.jpg"
+      alt="12 Triangles Bus Stop"
+      decoding="async" />
   </a>
   <div class="company-text">
     12 Triangles is a small but scrappy software startup located in Omaha, NE.

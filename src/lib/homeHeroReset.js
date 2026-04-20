@@ -1,6 +1,11 @@
-/** Dispatched so Home can clear sticky project hero (nav hover, etc.). */
-export const HOME_HERO_RESET = 'svanto-home-hero-reset'
+import { writable } from 'svelte/store'
 
-export function dispatchHomeHeroReset() {
-  window.dispatchEvent(new CustomEvent(HOME_HERO_RESET))
+/**
+ * Bumped whenever something outside Home wants Home to clear its sticky hero
+ * (e.g. hovering the brand link in the nav). Home subscribes and reacts.
+ */
+export const homeHeroResetSignal = writable(0)
+
+export function requestHomeHeroReset() {
+  homeHeroResetSignal.update((n) => n + 1)
 }
