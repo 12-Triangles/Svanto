@@ -283,6 +283,14 @@
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 0;
     border-top: 1px solid rgba(42, 24, 51, 0.1);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .project-item {
+    margin: 0;
+    padding: 0;
   }
 
   .project {
@@ -404,38 +412,42 @@
   </section>
 
   <section class="section">
-    <div class="project-list" role="list" onmouseleave={clearHover}>
+    <ul class="project-list" onmouseleave={clearHover}>
       {#each projects as project (project.id)}
         {#if project.internal}
-          <a
-            use:link
-            href={project.href}
-            class="project"
-            onmouseenter={() => activateProject(project)}
-            onfocus={() => activateProject(project)}>
-            <div class="meta">
-              <span>{project.label}</span>
-              <span>&nbsp;</span>
-            </div>
-            <h2 class="project-title">{project.title}</h2>
-            <p class="project-copy">{project.description}</p>
-          </a>
+          <li class="project-item">
+            <a
+              use:link
+              href={project.href}
+              class="project"
+              onmouseenter={() => activateProject(project)}
+              onfocus={() => activateProject(project)}>
+              <div class="meta">
+                <span>{project.label}</span>
+                <span>&nbsp;</span>
+              </div>
+              <h2 class="project-title">{project.title}</h2>
+              <p class="project-copy">{project.description}</p>
+            </a>
+          </li>
         {:else}
-          <a
-            href={project.href}
-            class="project"
-            onmouseenter={() => activateProject(project)}
-            onfocus={() => activateProject(project)}>
-            <div class="meta">
-              <span>{project.label}</span>
-              <span>&nbsp;</span>
-            </div>
-            <h2 class="project-title">{project.title}</h2>
-            <p class="project-copy">{project.description}</p>
-          </a>
+          <li class="project-item">
+            <a
+              href={project.href}
+              class="project"
+              onmouseenter={() => activateProject(project)}
+              onfocus={() => activateProject(project)}>
+              <div class="meta">
+                <span>{project.label}</span>
+                <span>&nbsp;</span>
+              </div>
+              <h2 class="project-title">{project.title}</h2>
+              <p class="project-copy">{project.description}</p>
+            </a>
+          </li>
         {/if}
       {/each}
-    </div>
+    </ul>
   </section>
 
   <div class="footer-links">
