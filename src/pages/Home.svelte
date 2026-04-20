@@ -117,8 +117,51 @@
     `--hero-accent: ${activeHero.heroAccent || '#6f1f8f'}; --hero-tint: ${activeHero.heroTint || 'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))'}; --hero-blur: ${activeHero.heroBlur || 'none'};`
   )
 
+  function scheduleBackgroundWork(fn) {
+    if (typeof window === 'undefined') return
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(() => fn(), { timeout: 1500 })
+      return
+    }
+    window.setTimeout(() => fn(), 0)
+  }
+
+  function preloadImage(url) {
+    if (!url || typeof window === 'undefined') return
+    const img = new Image()
+    img.decoding = 'async'
+    img.loading = 'eager'
+    img.src = url
+    if (typeof img.decode === 'function') {
+      img.decode().catch(() => {})
+    }
+  }
+
+  function warmHeroAssetCache() {
+    const urls = []
+    const seen = Object.create(null)
+
+    function addUrl(url) {
+      if (!url) return
+      if (seen[url]) return
+      seen[url] = true
+      urls.push(url)
+    }
+
+    if (defaultHero?.logo) addUrl(defaultHero.logo)
+    if (defaultHero?.heroImage) addUrl(defaultHero.heroImage)
+
+    for (const project of projects) {
+      if (project?.logo) addUrl(project.logo)
+      if (project?.heroImage) addUrl(project.heroImage)
+    }
+
+    for (const url of urls) preloadImage(url)
+  }
+
   onMount(() => {
     window.scrollTo(0, 0)
+    scheduleBackgroundWork(warmHeroAssetCache)
     let firstTick = true
     const unsubscribe = homeHeroResetSignal.subscribe(() => {
       if (firstTick) {
@@ -361,17 +404,8 @@
   </section>
 
   <section class="section">
-    {#snippet projectBody(project)}
-      <div class="meta">
-        <span>{project.label}</span>
-        <span>&nbsp;</span>
-      </div>
-      <h2 class="project-title">{project.title}</h2>
-      <p class="project-copy">{project.description}</p>
-    {/snippet}
-
     <div class="project-list" role="list" onmouseleave={clearHover}>
-      {#each projects as project}
+      {#each projects as project (project.id)}
         {#if project.internal}
           <a
             use:link
@@ -379,7 +413,12 @@
             class="project"
             onmouseenter={() => activateProject(project)}
             onfocus={() => activateProject(project)}>
-            {@render projectBody(project)}
+            <div class="meta">
+              <span>{project.label}</span>
+              <span>&nbsp;</span>
+            </div>
+            <h2 class="project-title">{project.title}</h2>
+            <p class="project-copy">{project.description}</p>
           </a>
         {:else}
           <a
@@ -387,7 +426,12 @@
             class="project"
             onmouseenter={() => activateProject(project)}
             onfocus={() => activateProject(project)}>
-            {@render projectBody(project)}
+            <div class="meta">
+              <span>{project.label}</span>
+              <span>&nbsp;</span>
+            </div>
+            <h2 class="project-title">{project.title}</h2>
+            <p class="project-copy">{project.description}</p>
           </a>
         {/if}
       {/each}
