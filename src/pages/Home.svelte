@@ -18,6 +18,22 @@
     }
   }
 
+  const logoDropShadow = 'drop-shadow(0 10px 30px rgba(42, 24, 51, 0.08))'
+
+  /** Same duration/easing as hero image; full-opacity crossfade with blur that clears to sharp */
+  function logoTransition(node, { duration = 480 } = {}) {
+    return {
+      duration,
+      easing: cubicOut,
+      css: (t) => {
+        const opacity = t
+        const blur = 14 * (1 - t)
+        const saturate = 0.95 + 0.07 * t
+        return `opacity: ${opacity}; filter: ${logoDropShadow} blur(${blur}px) saturate(${saturate});`
+      }
+    }
+  }
+
   const defaultHero = {
     id: '12triangles',
     title: '12 Triangles',
@@ -27,11 +43,11 @@
     heroMode: 'image',
     // heroAccent: 'rgba(111, 31, 143, 0.18)',
     // heroTint: 'linear-gradient(180deg, rgba(255,255,255,1), rgba(255,255,255,1))',
-    // logo: '/assets/12Triangles.svg',
+    logo: '/assets/12T.svg',
     // heroAccent: '#222222',
     heroSubtitle: 'Thoughtfully crafted AI services and digital product development',
     heroTint:
-      'linear-gradient(219deg, rgba(235, 108, 133, 0.16) 0%, rgba(194, 101, 232, 0.12) 38%, rgba(255, 255, 255, 0.55) 72%, rgba(255, 250, 252) 100%)',
+      'linear-gradient(219deg, rgba(235, 108, 133, 0.16) 0%, rgba(194, 101, 232, 0.12) 100%)',
     heroImage: '/assets/square.jpg'
     // heroBlur: 'radial-gradient(circle at 18% 22%, rgba(255,255,255,0.22), transparent 26%), radial-gradient(circle at 82% 26%, rgba(170,132,255,0.3), transparent 28%), radial-gradient(circle at 60% 82%, rgba(76,41,126,0.3), transparent 32%)'
   }
@@ -45,15 +61,16 @@
       label: 'Research',
       description:
         'Notes, case studies, and experiments co-created with AI Agents',
-      heroMode: 'wordmark',
+      heroMode: 'image',
       logo: '/assets/dodici.png',
       heroTitle: 'Dodici',
-      heroSubtitle: 'Openclaw + Claude + Obsidian',
+      heroSubtitle: 'The powerful play goes on, and you may contribute a verse',
       heroDescription:
         'Case studies, workflow notes, and product thinking from an AI business partner taking shape inside 12 Triangles',
       heroAccent: 'rgba(111, 31, 143, 0.16)',
       heroTint:
         'linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(244, 234, 236, 0.38), rgba(111, 31, 143, 0.05), rgba(235, 108, 133, 0.04))',
+        heroImage: '/assets/aiBackground.png',
       heroBlur: 'radial-gradient(circle at 20% 25%, rgba(255,255,255,0.28), transparent 30%), radial-gradient(circle at 80% 30%, rgba(235,108,133,0.32), transparent 26%), radial-gradient(circle at 50% 80%, rgba(111,31,143,0.32), transparent 32%)'
     },
     {
@@ -72,7 +89,7 @@
         'ICG 1.0 calculates card centering to help determine if your card is worth official grading',
       heroAccent: '#4e2f84',
       heroTint: 'linear-gradient(135deg, rgba(27, 21, 53, 0.78), rgba(78, 47, 132, 0.68), rgba(185, 145, 255, 0.32))',
-      heroImage: '/assets/icgPreview.jpg',
+      heroImage: '/assets/icgBackground.jpg',
       heroBlur: 'radial-gradient(circle at 18% 22%, rgba(255,255,255,0.22), transparent 26%), radial-gradient(circle at 82% 26%, rgba(170,132,255,0.3), transparent 28%), radial-gradient(circle at 60% 82%, rgba(76,41,126,0.3), transparent 32%)'
     },
     {
@@ -84,14 +101,14 @@
       description:
         'Flair makes it fast and easy to create and share your own custom stickers',
       heroMode: 'image',
-      logo: '/assets/flairLogo.svg',
+      logo: '/assets/flair.svg',
       heroTitle: 'Say it with Flair',
-      heroSubtitle: 'Easily create and share custom digital stickers',
+      heroSubtitle: 'Snapchat Developer Challenge Winner',
       heroDescription:
         'A more expressive product world built around delight, motion, and consumer-facing design sensibility.',
         heroAccent: '#4e2f84',
         heroTint: 'linear-gradient(135deg, rgba(27, 21, 53, 0.78), rgba(78, 47, 132, 0.68), rgba(185, 145, 255, 0.32))',
-      heroImage: '/assets/flairPreview.jpg',
+      heroImage: '/assets/flairBackground.jpg',
       heroBlur: 'radial-gradient(circle at 18% 22%, rgba(255,255,255,0.22), transparent 26%), radial-gradient(circle at 82% 26%, rgba(170,132,255,0.3), transparent 28%), radial-gradient(circle at 60% 82%, rgba(76,41,126,0.3), transparent 32%)'
     }
   ]
@@ -214,12 +231,25 @@
     margin-bottom: 18px;
   }
 
+  .hero-logo-wrap {
+    position: relative;
+    min-height: 288px;
+    margin: 0 auto 22px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .hero-logo {
     display: block;
     width: auto;
-    height: 288px;
-    
-    margin: 0 auto 22px;
+    max-height: 288px;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     filter: drop-shadow(0 10px 30px rgba(42, 24, 51, 0.08));
   }
 
@@ -290,7 +320,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    color: #8b7a91;
+    color: #222222;
   }
 
   .project-title {
@@ -349,7 +379,7 @@
   }
 </style>
 
-<div class="page">
+<main class="page">
   <section class="hero">
     <div
       class:is-project={!!(hoveredProject ?? lastHoveredProject)}
@@ -370,13 +400,24 @@
 
       <div class="hero-inner">
         <div class="hero-copy">
-            <img
-              class="hero-logo"
-              src={activeHero.logo}
-              alt={activeHero.subtitle}
-              width="auto"
-              height="288" />
-          <div class="hero-subtitle">{activeHero.heroSubtitle || activeHero.subtitle || ""}</div>
+          <div class="hero-logo-wrap">
+            {#key activeHero.id}
+              <img
+                class="hero-logo"
+                in:logoTransition
+                out:logoTransition
+                src={activeHero.logo}
+                alt={activeHero.title}
+                width="auto"
+                height="288" />
+            {/key}
+          </div>
+          {#if activeHero.heroSubtitle}
+          <div if={activeHero.heroSubtitle} class="hero-subtitle">{activeHero.heroSubtitle}</div>
+          {/if}
+          {#if !activeHero.heroSubtitle}
+            <div class="hero-subtitle">&nbsp;</div>
+          {/if}
           <!-- <div class="hero-description">{activeHero.heroDescription || activeHero.description || ""}</div> -->
         </div>
       </div>
@@ -422,4 +463,4 @@
     <a use:link href="/about" on:mouseenter={resetStickyHero}>About 12 Triangles</a>
     <!-- <a href="https://x.com/12triangles">Twitter</a> -->
   </div>
-</div>
+</main>
