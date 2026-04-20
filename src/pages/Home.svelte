@@ -391,7 +391,6 @@
           <div
             class="hero-image is-visible"
             in:heroImageTransition
-            out:heroImageTransition
             style={`--hero-image: url(${activeHero.heroImage});`} />
         {/key}
       {/if}
@@ -405,7 +404,6 @@
               <img
                 class="hero-logo"
                 in:logoTransition
-                out:logoTransition
                 src={activeHero.logo}
                 alt={activeHero.title}
                 width="auto"
@@ -460,7 +458,11 @@
   </section>
 
   <div class="footer-links">
-    <a use:link href="/about" on:mouseenter={resetStickyHero}>About 12 Triangles</a>
+    <a
+      use:link
+      href="/about"
+      on:mouseenter={resetStickyHero}
+      >About 12 Triangles</a>
     <!-- <a href="https://x.com/12triangles">Twitter</a> -->
   </div>
 </main>

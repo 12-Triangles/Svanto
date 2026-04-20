@@ -1,11 +1,32 @@
 <script>
-  import Router, { link } from 'svelte-spa-router'
+  import { onMount } from 'svelte'
+  import Router, { link, location } from 'svelte-spa-router'
   import { dispatchHomeHeroReset } from './lib/homeHeroReset.js'
   import Home from './pages/Home.svelte'
   import About from './pages/About.svelte'
   import Contact from './pages/Contact.svelte'
   import DodiciBlog from './pages/DodiciBlog.svelte'
   import DodiciCaseStudy from './pages/DodiciCaseStudy.svelte'
+
+  /**
+   * Scroll restoration for SPA routing:
+   * - svelte-spa-router keeps the current scroll position by default
+   * - we want new routes to start at the top without a visible "jump"
+   */
+  onMount(() => {
+    // Prevent browser from trying to restore scroll on hash/history changes
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+
+    const unsubscribe = location.subscribe(($location) => {
+      // Make the scroll reset happen as early as possible in the route-change timeline.
+      // Setting both documentElement/body covers Safari + older browsers.
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+      window.scrollTo(0, 0)
+    })
+
+    return unsubscribe
+  })
 </script>
 
 <style>
