@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+echo "post-commit: building..."
+npm run build
+
+echo "post-commit: deploying to Firebase..."
+firebase deploy
