@@ -140,7 +140,7 @@
 
   <header class="header">
     <div class="eyebrow">Case Study / March 2026</div>
-    <h1>Inside Dodici</h1>
+    <h1>Hello, Hermes Agent</h1>
     <div class="standfirst">
       A case study on shaping an AI assistant into a practical business partner—
       one built to retain context, execute useful work, and support the real
