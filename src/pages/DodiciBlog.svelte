@@ -1,17 +1,11 @@
+<svelte:head>
+  <title>AI Systems — 12 Triangles</title>
+</svelte:head>
+
 <script>
   import { onMount } from 'svelte'
   import { link } from 'svelte-spa-router'
-
-  const posts = [
-    {
-      title: 'Inside Dodici',
-      slug: '/dodici/case-study',
-      category: 'Case Study',
-      date: 'March 2026',
-      summary:
-        'A first look at shaping Dodici into an AI business partner focused on continuity, execution, and practical operating value.'
-    }
-  ]
+  import { posts } from '../data/posts.js'
 
   onMount(() => {
     window.scrollTo(0, 0)
@@ -140,7 +134,7 @@
 
   <section class="post-list">
     {#each posts as post}
-      <a use:link href={post.slug} class="post">
+      <a use:link href={`/dodici/${post.slug}`} class="post">
         <div class="meta">
           <span>{post.date}</span>
           <span>{post.category}</span>

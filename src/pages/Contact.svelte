@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>Work with Us — 12 Triangles</title>
+</svelte:head>
+
 <script>
   import { onMount } from 'svelte'
 
@@ -149,12 +153,6 @@
     padding: 28px;
   }
 
-  .form-intro {
-    margin: 0 0 22px;
-    color: #4b4250;
-    line-height: 1.75;
-  }
-
   form {
     display: grid;
     gap: 18px;
@@ -230,13 +228,6 @@
     background: rgba(111, 31, 143, 0.07);
   }
 
-  .help {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #6e6174;
-  }
-
   .submit {
     display: inline-flex;
     align-items: center;
@@ -253,46 +244,9 @@
     cursor: pointer;
   }
 
-  .architecture {
-    margin-top: 40px;
-    padding-top: 28px;
-    border-top: 1px solid rgba(42, 24, 51, 0.1);
-  }
-
-  .architecture-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-    margin-top: 20px;
-  }
-
-  .architecture-card {
-    padding: 20px;
-    border: 1px solid rgba(42, 24, 51, 0.1);
-    background: rgba(255, 255, 255, 0.5);
-  }
-
-  .architecture-card h3 {
-    margin: 0 0 10px;
-    font-size: 16px;
-    color: #201824;
-  }
-
-  .architecture-card p {
-    margin: 0;
-    color: #4b4250;
-    line-height: 1.7;
-  }
-
-  .recommended {
-    border-color: rgba(111, 31, 143, 0.28);
-    background: rgba(111, 31, 143, 0.05);
-  }
-
   @media (max-width: 960px) {
     .hero,
-    .layout,
-    .architecture-grid {
+    .layout {
       grid-template-columns: 1fr;
     }
   }
@@ -376,13 +330,9 @@
 
     <div class="form-panel">
       <h2>Client intake</h2>
-      <p class="form-intro">
-        Frontend-first implementation for now. The structure is designed so it
-        can be wired to Formspree immediately or upgraded later to Supabase for
-        lead scoring, storage, and follow-up workflows.
-      </p>
 
-      <form>
+      <!-- TODO: replace YOUR_FORM_ID with the Formspree endpoint ID -->
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
         <div class="grid">
           <div class="field">
             <label for="name">Name</label>
@@ -562,42 +512,8 @@
         <input type="hidden" name="selected_services" value={state.services.join(', ')} />
         <input type="hidden" name="expected_outcomes" value={state.outcomes.join(', ')} />
 
-        <p class="help">
-          Recommended submission architecture: start with a simple form endpoint
-          for speed, then promote the same payload to a database-backed intake
-          pipeline when you’re ready to score and automate lead follow-up.
-        </p>
-
         <button class="submit" type="submit">Submit intake →</button>
       </form>
     </div>
   </div>
-
-  <section class="architecture">
-    <div class="kicker">Submission architecture recommendation</div>
-    <h2>Recommended rollout</h2>
-    <div class="architecture-grid">
-      <div class="architecture-card recommended">
-        <h3>Phase 1 · Fastest path</h3>
-        <p>
-          Wire this exact form to Formspree or a similar endpoint. Lowest lift,
-          fastest launch, and enough to start qualifying leads immediately.
-        </p>
-      </div>
-      <div class="architecture-card">
-        <h3>Phase 2 · Better internal workflow</h3>
-        <p>
-          Route submissions into Supabase with a lead table, intake status,
-          simple scoring fields, and optional notification automation.
-        </p>
-      </div>
-      <div class="architecture-card">
-        <h3>Phase 3 · Full qualification engine</h3>
-        <p>
-          Add scoring logic for urgency, value, complexity, and readiness, then
-          trigger follow-up sequences or internal summaries automatically.
-        </p>
-      </div>
-    </div>
-  </section>
 </div>

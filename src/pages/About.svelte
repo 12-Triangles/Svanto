@@ -1,5 +1,10 @@
+<svelte:head>
+  <title>About — 12 Triangles</title>
+</svelte:head>
+
 <script>
   import { onMount } from 'svelte'
+  import { link } from 'svelte-spa-router'
 
   let isBigLogoVisible = $state(false)
 
@@ -15,7 +20,6 @@
   .header {
     display: flex;
     flex-direction: column;
-    /* padding: 42px 0px 0px; */
     position: relative;
   }
   
@@ -65,7 +69,7 @@
     color: #222;
   }
 
-  .seperator {
+  .separator {
     background: #6f1f8f;
     margin: auto;
     width: 96px;
@@ -82,7 +86,7 @@
 </style>
 
 <div class="header">
-  <a class="big-logo" href="/">
+  <a class="big-logo" use:link href="/">
     <img
       class:is-visible={isBigLogoVisible}
       src="/assets/busstop.jpg"
@@ -96,7 +100,7 @@
     solutions.
   </div>
   <div>
-    <div class="seperator"></div>
+    <div class="separator"></div>
   </div>
   <div class="name">Tyler Kuster</div>
   <div class="about-text">
@@ -105,7 +109,7 @@
     over the last 15 years.
   </div>
   <div>
-    <div class="seperator"></div>
+    <div class="separator"></div>
   </div>
   <div class="name">Alum</div>
   <div class="about-text">

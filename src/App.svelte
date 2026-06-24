@@ -7,7 +7,8 @@
   import DodiciBlog from './pages/DodiciBlog.svelte'
 
   const Contact = wrap({ asyncComponent: () => import('./pages/Contact.svelte') })
-  const DodiciCaseStudy = wrap({ asyncComponent: () => import('./pages/DodiciCaseStudy.svelte') })
+  const Post = wrap({ asyncComponent: () => import('./pages/Post.svelte') })
+  const LegacyCaseStudy = wrap({ asyncComponent: () => import('./pages/LegacyCaseStudy.svelte') })
 
   /**
    * Scroll restoration for SPA routing: reset to top on every route change
@@ -102,7 +103,8 @@
         '/about': About,
         '/contact': Contact,
         '/dodici': DodiciBlog,
-        '/dodici/case-study': DodiciCaseStudy,
+        '/dodici/case-study': LegacyCaseStudy,
+        '/dodici/:slug': Post,
         '*': Home
       }}
     />

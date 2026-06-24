@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>12 Triangles</title>
+</svelte:head>
+
 <script>
   import { onMount } from 'svelte'
   import { cubicOut } from 'svelte/easing'
