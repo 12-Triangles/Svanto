@@ -1,13 +1,13 @@
 export const posts = [
   {
-    slug: 'inside-dodici',
-    title: 'Inside Dodici',
-    category: 'Case Study',
-    date: 'March 2026',
+    slug: "hello-hermes-agent",
+    title: "Hello, Hermes Agent",
+    category: "Case Study",
+    date: "March 2026",
     summary:
-      'A first look at shaping Dodici into an AI business partner focused on continuity, execution, and practical operating value.',
+      "A case study on shaping an AI assistant into a practical business partner—one built to retain context, execute useful work, and support the real pace of product development.",
     standfirst:
-      'A case study on shaping an AI assistant into a practical business partner—one built to retain context, execute useful work, and support the real pace of product development.',
-    tags: ['12 Triangles', 'AI Operations', 'First Entry']
-  }
-]
+      "A case study on shaping an AI assistant into a practical business partner—one built to retain context, execute useful work, and support the real pace of product development.",
+    tags: ["12 Triangles", "AI Operations", "First Entry", "Hermes"],
+  },
+];

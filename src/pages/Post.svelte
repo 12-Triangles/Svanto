@@ -2,12 +2,12 @@
   import { onMount } from 'svelte'
   import { link } from 'svelte-spa-router'
   import { posts } from '../data/posts.js'
-  import InsideDodici from '../content/inside-dodici.svelte'
+  import HelloHermesAgent from '../content/hello-hermes-agent.svelte'
 
   let { params = {} } = $props()
 
   const contentMap = {
-    'inside-dodici': InsideDodici
+    'hello-hermes-agent': HelloHermesAgent
   }
 
   const post = $derived(posts.find((p) => p.slug === params.slug) ?? null)
